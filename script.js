@@ -32,7 +32,7 @@ const questions = [
     {
         question: "6. En quelle année le Stade Lavallois a-t-il remporté la Coupe Gambardella, le plus grand trophée national pour les équipes de jeunes?",
         options: ["A) 1984", "B) 1976", "C) 1993"],
-        correctAnswer: "B) 1976",
+        correctAnswer: "A) 1984",
         image: "photo_6.jpg"
     },
     {
@@ -50,13 +50,13 @@ const questions = [
     {
         question: "9. Contre quelle équipe le Stade Lavallois a-t-il joué son tout premier match, une défaite 6-0 en novembre 1902?",
         options: ["A) Le Mans Union Club 72", "B) Angers SCO", "C) Stade Rennais"],
-        correctAnswer: "B) Angers SCO",
+        correctAnswer: "C) Stade Rennais",
         image: "photo_9.jpg"
     },
     {
         question: "10. Qui est le meilleur buteur de l'histoire du club toutes compétitions officielles confondues, un record souvent méconnu datant de l'époque amateur?",
         options: ["A) Uwe Krause", "B) Guilherme Mauricio", "C) Jean-François Fort"],
-        correctAnswer: "A) Uwe Krause", // Correction basée sur la réponse fournie : A) Uwe Krause
+        correctAnswer: "C) Jean-François Fort", // Correction basée sur la réponse fournie : A) Uwe Krause
         image: "photo_10.jpg"
     }
 ];
