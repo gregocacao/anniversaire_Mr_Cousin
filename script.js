@@ -1,4 +1,5 @@
 const questions = [
+    // Vos questions restent ici, inchangées
     {
         question: "1. En quelle année le Stade Lavallois a-t-il été officiellement fondé par Joseph Gemain?",
         options: ["A) 1898", "B) 1902", "C) 1918"],
@@ -30,7 +31,7 @@ const questions = [
         image: "photo_5.jpg"
     },
     {
-        question: "6. En quelle année le Stade Lavallois a-t-il remporté la Coupe Gambardella, le plus grand trophée national pour les équipes de jeunes?",
+        question: "6. En quelle année le Stade Lavallois a-t-il remporté la Coupe Gambardella, le grand trophée national pour les équipes de jeunes?",
         options: ["A) 1984", "B) 1976", "C) 1993"],
         correctAnswer: "A) 1984",
         image: "photo_6.jpg"
@@ -44,24 +45,26 @@ const questions = [
     {
         question: "8. Quel joueur détient le record du plus grand nombre de matchs officiels disputés sous le maillot lavallois?",
         options: ["A) Jean-Marc Miton", "B) Mickaël Buzaré", "C) Anthony Gonçalves"],
-        correctAnswer: "B) Mickaël Buzaré", // Correction basée sur la réponse fournie : A) Jean-Marc Miton
+        correctAnswer: "A) Jean-Marc Miton", // Correction basée sur la réponse fournie : A) Jean-Marc Miton
         image: "photo_8.jpg"
     },
     {
         question: "9. Contre quelle équipe le Stade Lavallois a-t-il joué son tout premier match, une défaite 6-0 en novembre 1902?",
         options: ["A) Le Mans Union Club 72", "B) Angers SCO", "C) Stade Rennais"],
-        correctAnswer: "C) Stade Rennais",
+        correctAnswer: "B) Angers SCO",
         image: "photo_9.jpg"
     },
     {
         question: "10. Qui est le meilleur buteur de l'histoire du club toutes compétitions officielles confondues, un record souvent méconnu datant de l'époque amateur?",
         options: ["A) Uwe Krause", "B) Guilherme Mauricio", "C) Jean-François Fort"],
-        correctAnswer: "C) Jean-François Fort", // Correction basée sur la réponse fournie : A) Uwe Krause
+        correctAnswer: "A) Uwe Krause", // Correction basée sur la réponse fournie : A) Uwe Krause
         image: "photo_10.jpg"
     }
 ];
 
 const quizPageContainer = document.getElementById('quiz-page-container');
+const introPage = document.getElementById('intro-page'); // Nouvelle référence
+const startQuizButton = document.getElementById('start-quiz-button'); // Nouvelle référence
 let currentQuestionIndex = 0;
 
 function createQuestionPage(questionData, index) {
@@ -170,13 +173,18 @@ function displayWinPage() {
 
 // Initialisation du quiz
 function initQuiz() {
+    // Crée toutes les pages de questions, mais ne les affiche pas encore
     questions.forEach((q, index) => {
         quizPageContainer.appendChild(createQuestionPage(q, index));
     });
-    // Afficher la première question
-    if (questions.length > 0) {
-        document.getElementById('question-page-0').classList.add('active');
-    }
+
+    // Écouteur d'événement pour le bouton "Commencer le Quiz"
+    startQuizButton.addEventListener('click', () => {
+        introPage.classList.remove('active'); // Masque la page d'introduction
+        if (questions.length > 0) {
+            document.getElementById('question-page-0').classList.add('active'); // Affiche la première question
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', initQuiz);
