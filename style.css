@@ -135,7 +135,7 @@ body {
 }
 
 .garmin-link {
-    color: #FF6700; /* Couleur orange Tango */
+    color: #0000ff; /* Couleur orange Tango */
     text-decoration: none; /* Enlève le soulignement par défaut */
     font-weight: bold;
     border-bottom: 2px solid transparent; /* Pour l'effet de survol */
