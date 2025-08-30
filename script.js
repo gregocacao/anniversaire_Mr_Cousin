@@ -45,19 +45,19 @@ const questions = [
     {
         question: "8. Quel joueur détient le record du plus grand nombre de matchs officiels disputés sous le maillot lavallois?",
         options: ["A) Jean-Marc Miton", "B) Mickaël Buzaré", "C) Anthony Gonçalves"],
-        correctAnswer: "A) Jean-Marc Miton", // Correction basée sur la réponse fournie : A) Jean-Marc Miton
+        correctAnswer: "B) Mickaël Buzaré", 
         image: "photo_8.jpg"
     },
     {
         question: "9. Contre quelle équipe le Stade Lavallois a-t-il joué son tout premier match, une défaite 6-0 en novembre 1902?",
         options: ["A) Le Mans Union Club 72", "B) Angers SCO", "C) Stade Rennais"],
-        correctAnswer: "B) Angers SCO",
+        correctAnswer: "C) Stade Rennais",
         image: "photo_9.jpg"
     },
     {
         question: "10. Qui est le meilleur buteur de l'histoire du club toutes compétitions officielles confondues, un record souvent méconnu datant de l'époque amateur?",
         options: ["A) Uwe Krause", "B) Guilherme Mauricio", "C) Jean-François Fort"],
-        correctAnswer: "A) Uwe Krause", // Correction basée sur la réponse fournie : A) Uwe Krause
+        correctAnswer: "C) Jean-François Fort", 
         image: "photo_10.jpg"
     }
 ];
