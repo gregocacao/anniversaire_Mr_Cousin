@@ -159,7 +159,7 @@ function goToNextQuestion() {
 function displayWinPage() {
     quizPageContainer.innerHTML = `
         <div class="win-message active quiz-page">
-            <h2>Félicitations, vous avez gagné le Quiz du Stade Lavallois !</h2>
+            <h2>Félicitations Benoit, tu as gagné le Quiz du Stade Lavallois !</h2>
             <img src="./images/photo_11.jpg" alt="Photo de victoire" class="quiz-image">
         </div>
     `;
