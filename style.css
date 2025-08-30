@@ -127,3 +127,22 @@ body {
     font-size: 2em;
     margin-bottom: 20px;
 }
+
+/* Styles pour le lien Garmin */
+.garmin-link-container {
+    margin-top: 25px; /* Espace au-dessus du lien */
+    font-size: 1.1em;
+}
+
+.garmin-link {
+    color: #FF6700; /* Couleur orange Tango */
+    text-decoration: none; /* Enlève le soulignement par défaut */
+    font-weight: bold;
+    border-bottom: 2px solid transparent; /* Pour l'effet de survol */
+    transition: all 0.3s ease;
+}
+
+.garmin-link:hover {
+    color: #e65c00; /* Orange plus foncé au survol */
+    border-color: #e65c00; /* Souligne le texte au survol */
+}
