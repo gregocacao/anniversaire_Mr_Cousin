@@ -165,7 +165,7 @@ function displayWinPage() {
             <h2>Bravo Champion !</h2>
             <img src="./images/photo_11.jpg" alt="Photo de victoire" class="quiz-image">
             <p class="garmin-link-container">
-                <a href="URL_DE_VOTRE_TRACE_GARMIN" target="_blank" class="garmin-link">Découvrez la trace Garmin !</a>
+                <a href="URL_DE_VOTRE_TRACE_GARMIN" target="_blank" class="garmin-link">Trace Garmin to be attending !</a>
             </p>
         </div>
     `;
