@@ -26,7 +26,7 @@ const questions = [
     {
         question: "5. Qui est le meilleur buteur de l'histoire du Stade Lavallois en Division 1/Ligue 1?",
         options: ["A) Georg Tripp", "B) Uwe Krause", "C) Patrick Delamontagne"],
-        correctAnswer: "C) Patrick Delamontagne",
+        correctAnswer: "B) Uwe Krause",
         image: "photo_5.jpg"
     },
     {
@@ -38,13 +38,13 @@ const questions = [
     {
         question: "7. Avant d'adopter définitivement la couleur 'Tango' en 1923, quelles étaient les couleurs des tout premiers maillots du club lors de son match inaugural en 1902?",
         options: ["A) Bleu et Blanc", "B) Vert et Blanc", "C) Noir et Rouge"],
-        correctAnswer: "A) Bleu et Blanc",
+        correctAnswer: "C) Noir et Rouge",
         image: "photo_7.jpg"
     },
     {
         question: "8. Quel joueur détient le record du plus grand nombre de matchs officiels disputés sous le maillot lavallois?",
         options: ["A) Jean-Marc Miton", "B) Mickaël Buzaré", "C) Anthony Gonçalves"],
-        correctAnswer: "A) Jean-Marc Miton", // Correction basée sur la réponse fournie : A) Jean-Marc Miton
+        correctAnswer: "B) Mickaël Buzaré", // Correction basée sur la réponse fournie : A) Jean-Marc Miton
         image: "photo_8.jpg"
     },
     {
@@ -159,7 +159,7 @@ function goToNextQuestion() {
 function displayWinPage() {
     quizPageContainer.innerHTML = `
         <div class="win-message active quiz-page">
-            <h2>Félicitations Benoit, tu as gagné le Quiz du Stade Lavallois !</h2>
+            <h2>Bravo Champion !</h2>
             <img src="./images/photo_11.jpg" alt="Photo de victoire" class="quiz-image">
         </div>
     `;
