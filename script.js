@@ -77,7 +77,7 @@ const errorMessages = [
     " C'est fascinant cette capacité que tu as à avoir tort sur absolument tout. ",
     " T'es une merde en fait ? C'est une vraie question. ",
     "Franchement, tu as autant d'avenir que le Stade Lavallois en Ligue 1. ",
-    " Ton niveau intellectuel, c'est le secret pour apprécier un match à Le Basser ? "
+    " Ton niveau intellectuel, c'est le secret pour apprécier un match à Le Basser ? ",
     " Je n'ai plus de mots pour qualifier l'abîme de ton incompétence. Disparais, et retourne dans l'anonymat de la Ligue 2, c'est là qu'est ta place. "
 
 ];
