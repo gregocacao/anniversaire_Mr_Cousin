@@ -63,9 +63,22 @@ const questions = [
 ];
 
 const quizPageContainer = document.getElementById('quiz-page-container');
-const introPage = document.getElementById('intro-page'); // Nouvelle référence
-const startQuizButton = document.getElementById('start-quiz-button'); // Nouvelle référence
+const introPage = document.getElementById('intro-page');
+const startQuizButton = document.getElementById('start-quiz-button');
 let currentQuestionIndex = 0;
+
+// --- NOUVEAUX AJOUTS ---
+let totalErrors = 0; // Compteur global d'erreurs
+const errorMessages = [
+    "Aïe ! Première erreur... La route est encore longue, ne lâche rien !",
+    "Deuxième erreur. On dirait que le cadeau s'éloigne un peu...",
+    "Troisième erreur ! Attention, à ce rythme, le cadeau risque de rester dans sa boîte !",
+    "Encore raté... Tu es sûr de bien connaître le Stade Lavallois ?!",
+    "Bon, il est peut-être temps de réviser tes classiques. Tout est à refaire."
+];
+const defaultErrorMessage = "C'est une erreur de trop. Le défi est corsé, il faut tout recommencer !";
+// --- FIN DES NOUVEAUX AJOUTS ---
+
 
 function createQuestionPage(questionData, index) {
     const pageDiv = document.createElement('div');
@@ -108,17 +121,15 @@ function createQuestionPage(questionData, index) {
     return pageDiv;
 }
 
+// --- FONCTION checkAnswer ENTIÈREMENT MISE À JOUR ---
 function checkAnswer(selectedButton, selectedOption, correctAnswer, pageDiv) {
     const optionButtons = pageDiv.querySelectorAll('.option-button');
     const feedbackMessage = pageDiv.querySelector('.feedback-message');
     const nextButton = pageDiv.querySelector('.next-button');
 
-    // Désactiver tous les boutons après une sélection
+    // Désactiver tous les boutons pour empêcher de cliquer à nouveau
     optionButtons.forEach(button => {
         button.disabled = true;
-        if (button.textContent === correctAnswer) {
-            button.classList.add('correct');
-        }
     });
 
     if (selectedOption === correctAnswer) {
@@ -126,30 +137,41 @@ function checkAnswer(selectedButton, selectedOption, correctAnswer, pageDiv) {
         feedbackMessage.textContent = "Bonne réponse !";
         feedbackMessage.classList.remove('wrong-feedback');
         feedbackMessage.classList.add('correct-feedback');
+
         if (currentQuestionIndex < questions.length - 1) {
-            nextButton.style.display = 'block'; // Afficher le bouton "Suivant"
+            nextButton.style.display = 'block';
         } else {
-            // C'est la dernière question, afficher le message de victoire
-            displayWinPage();
+            // C'est la dernière bonne réponse, afficher la page de victoire
+            setTimeout(displayWinPage, 1000); // Ajoute un petit délai pour voir la bonne réponse
         }
     } else {
+        // Logique en cas de mauvaise réponse
         selectedButton.classList.add('wrong');
-        feedbackMessage.textContent = "Mauvaise réponse. Essayez encore !"; // Le défi est de répondre correctement pour avancer
-        feedbackMessage.classList.remove('correct-feedback');
-        feedbackMessage.classList.add('wrong-feedback');
-        // Réactiver les boutons et permettre de réessayer
+        
+        // Révéler la bonne réponse
         optionButtons.forEach(button => {
-            if (button !== selectedButton) { // Réactiver tous les boutons sauf celui qui vient d'être cliqué s'il était faux
-                button.disabled = false;
-                button.classList.remove('wrong');
-                button.classList.remove('correct');
+            if (button.textContent === correctAnswer) {
+                button.classList.add('correct');
             }
         });
-        selectedButton.disabled = false; // Permettre de cliquer à nouveau si la réponse est fausse
-        nextButton.style.display = 'none'; // Cacher le bouton "Suivant" tant que la réponse n'est pas bonne
+
+        totalErrors++; // Incrémenter le compteur d'erreurs
+
+        // Choisir le message d'erreur en fonction du nombre total d'erreurs
+        const message = errorMessages[totalErrors - 1] || defaultErrorMessage;
+        feedbackMessage.textContent = message;
+        
+        feedbackMessage.classList.remove('correct-feedback');
+        feedbackMessage.classList.add('wrong-feedback');
+
+        // Créer et afficher le bouton "Recommencer"
+        const restartButton = document.createElement('button');
+        restartButton.textContent = 'Recommencer';
+        restartButton.classList.add('next-button', 'restart-button'); // Utilise le style de base + le nouveau
+        restartButton.onclick = restartQuiz;
+        pageDiv.appendChild(restartButton);
     }
 }
-
 
 function goToNextQuestion() {
     document.getElementById(`question-page-${currentQuestionIndex}`).classList.remove('active');
@@ -160,29 +182,61 @@ function goToNextQuestion() {
 }
 
 function displayWinPage() {
+    // Masquer la dernière question pour ne montrer que la page de victoire
+    const lastQuestionPage = document.getElementById(`question-page-${currentQuestionIndex}`);
+    if(lastQuestionPage) {
+        lastQuestionPage.classList.remove('active');
+    }
+    
+    // Vider le conteneur pour être sûr et afficher le message de victoire
     quizPageContainer.innerHTML = `
         <div class="win-message active quiz-page">
             <h2>Bravo Champion !</h2>
             <img src="./images/photo_11.jpg" alt="Photo de victoire" class="quiz-image">
-            <p class="garmin-link-container">
-                <a href="URL_DE_VOTRE_TRACE_GARMIN" target="_blank" class="garmin-link">Trace Garmin to be attending !</a>
-            </p>
+            <p>Tu as prouvé tes connaissances et mérites amplement ton cadeau !</p>
+            <div class="garmin-link-container">
+                <p>Voici le lien vers ton cadeau :</p>
+                <a href="https://www.garmin.com/fr-FR/p/735563" target="_blank" class="garmin-link">Découvrir le cadeau !</a>
+            </div>
         </div>
     `;
 }
 
-// Initialisation du quiz
-function initQuiz() {
-    // Crée toutes les pages de questions, mais ne les affiche pas encore
+// --- NOUVELLE FONCTION POUR RECOMMENCER LE QUIZ ---
+function restartQuiz() {
+    // Réinitialiser les variables
+    currentQuestionIndex = 0;
+    totalErrors = 0;
+
+    // Vider les anciennes pages de questions
+    quizPageContainer.innerHTML = '';
+    
+    // Reconstruire les pages de questions
+    buildQuizPages();
+    
+    // Cacher la page de questions et afficher la page d'intro
+    const firstQuestionPage = document.getElementById('question-page-0');
+    if (firstQuestionPage) {
+        firstQuestionPage.classList.remove('active');
+    }
+    introPage.classList.add('active');
+}
+
+// La création des pages est maintenant dans sa propre fonction pour pouvoir être appelée au démarrage et au redémarrage
+function buildQuizPages() {
     questions.forEach((q, index) => {
         quizPageContainer.appendChild(createQuestionPage(q, index));
     });
+}
 
-    // Écouteur d'événement pour le bouton "Commencer le Quiz"
+// Initialisation du quiz
+function initQuiz() {
+    buildQuizPages(); // Crée les pages au chargement initial
+
     startQuizButton.addEventListener('click', () => {
-        introPage.classList.remove('active'); // Masque la page d'introduction
+        introPage.classList.remove('active');
         if (questions.length > 0) {
-            document.getElementById('question-page-0').classList.add('active'); // Affiche la première question
+            document.getElementById('question-page-0').classList.add('active');
         }
     });
 }
