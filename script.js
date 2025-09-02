@@ -69,11 +69,17 @@ let currentQuestionIndex = 0;
 
 let totalErrors = 0;
 const errorMessages = [
-    "Aïe ! Première erreur... La route est encore longue, ne lâche rien !",
-    "Deuxième erreur. On dirait que le cadeau s'éloigne un peu...",
-    "Troisième erreur ! Attention, à ce rythme, le cadeau risque de rester dans sa boîte !",
-    "Encore raté... Tu es sûr de bien connaître le Stade Lavallois ?!",
-    "Bon, il est peut-être temps de réviser tes classiques. Tout est à refaire."
+    "Allez Benoit, pas de souci, c'est la question d'échauffement. Tout le monde peut se tromper !",
+    " Encore ? Étonnant. Ce n’était pas là plus dure pourtant, celle-là. ",
+    " Sérieusement, rends l'écharpe. Tu ne la mérites pas. ",
+    " Le mec est nul en fait ? C'est ça, supporter Laval ? Ça explique le niveau. ", 
+    " 5ème Erreur, ce n’est pas possible, ton QI doit être équivalent au nombre de buts que Laval marque par saison. ",
+    " C'est fascinant cette capacité que tu as à avoir tort sur absolument tout. ",
+    " T'es une merde en fait ? C'est une vraie question. ",
+    "Franchement, tu as autant d'avenir que le Stade Lavallois en Ligue 1. ",
+    " Ton niveau intellectuel, c'est le secret pour apprécier un match à Le Basser ? "
+    " Je n'ai plus de mots pour qualifier l'abîme de ton incompétence. Disparais, et retourne dans l'anonymat de la Ligue 2, c'est là qu'est ta place. "
+
 ];
 const defaultErrorMessage = "C'est une erreur de trop. Le défi est corsé, il faut tout recommencer !";
 
