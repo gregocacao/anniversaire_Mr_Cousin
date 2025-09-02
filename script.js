@@ -67,7 +67,6 @@ const introPage = document.getElementById('intro-page');
 const startQuizButton = document.getElementById('start-quiz-button');
 let currentQuestionIndex = 0;
 
-// --- NOUVEAUX AJOUTS ---
 let totalErrors = 0; // Compteur global d'erreurs
 const errorMessages = [
     "Aïe ! Première erreur... La route est encore longue, ne lâche rien !",
@@ -77,8 +76,6 @@ const errorMessages = [
     "Bon, il est peut-être temps de réviser tes classiques. Tout est à refaire."
 ];
 const defaultErrorMessage = "C'est une erreur de trop. Le défi est corsé, il faut tout recommencer !";
-// --- FIN DES NOUVEAUX AJOUTS ---
-
 
 function createQuestionPage(questionData, index) {
     const pageDiv = document.createElement('div');
@@ -121,13 +118,11 @@ function createQuestionPage(questionData, index) {
     return pageDiv;
 }
 
-// --- FONCTION checkAnswer ENTIÈREMENT MISE À JOUR ---
 function checkAnswer(selectedButton, selectedOption, correctAnswer, pageDiv) {
     const optionButtons = pageDiv.querySelectorAll('.option-button');
     const feedbackMessage = pageDiv.querySelector('.feedback-message');
     const nextButton = pageDiv.querySelector('.next-button');
 
-    // Désactiver tous les boutons pour empêcher de cliquer à nouveau
     optionButtons.forEach(button => {
         button.disabled = true;
     });
@@ -141,33 +136,28 @@ function checkAnswer(selectedButton, selectedOption, correctAnswer, pageDiv) {
         if (currentQuestionIndex < questions.length - 1) {
             nextButton.style.display = 'block';
         } else {
-            // C'est la dernière bonne réponse, afficher la page de victoire
-            setTimeout(displayWinPage, 1000); // Ajoute un petit délai pour voir la bonne réponse
+            setTimeout(displayWinPage, 1000); 
         }
     } else {
-        // Logique en cas de mauvaise réponse
         selectedButton.classList.add('wrong');
         
-        // Révéler la bonne réponse
         optionButtons.forEach(button => {
             if (button.textContent === correctAnswer) {
                 button.classList.add('correct');
             }
         });
 
-        totalErrors++; // Incrémenter le compteur d'erreurs
+        totalErrors++; 
 
-        // Choisir le message d'erreur en fonction du nombre total d'erreurs
         const message = errorMessages[totalErrors - 1] || defaultErrorMessage;
         feedbackMessage.textContent = message;
         
         feedbackMessage.classList.remove('correct-feedback');
         feedbackMessage.classList.add('wrong-feedback');
 
-        // Créer et afficher le bouton "Recommencer"
         const restartButton = document.createElement('button');
         restartButton.textContent = 'Recommencer';
-        restartButton.classList.add('next-button', 'restart-button'); // Utilise le style de base + le nouveau
+        restartButton.classList.add('next-button', 'restart-button');
         restartButton.onclick = restartQuiz;
         pageDiv.appendChild(restartButton);
     }
@@ -182,13 +172,11 @@ function goToNextQuestion() {
 }
 
 function displayWinPage() {
-    // Masquer la dernière question pour ne montrer que la page de victoire
     const lastQuestionPage = document.getElementById(`question-page-${currentQuestionIndex}`);
     if(lastQuestionPage) {
         lastQuestionPage.classList.remove('active');
     }
     
-    // Vider le conteneur pour être sûr et afficher le message de victoire
     quizPageContainer.innerHTML = `
         <div class="win-message active quiz-page">
             <h2>Bravo Champion !</h2>
@@ -202,11 +190,11 @@ function displayWinPage() {
     `;
 }
 
-// --- NOUVELLE FONCTION POUR RECOMMENCER LE QUIZ ---
+// --- FONCTION CORRIGÉE ---
 function restartQuiz() {
-    // Réinitialiser les variables
+    // Réinitialiser la progression des questions, MAIS PAS LE COMPTEUR D'ERREURS
     currentQuestionIndex = 0;
-    totalErrors = 0;
+    // totalErrors = 0; // <-- C'EST CETTE LIGNE QUI POSAIT PROBLÈME, ON LA SUPPRIME !
 
     // Vider les anciennes pages de questions
     quizPageContainer.innerHTML = '';
@@ -222,16 +210,14 @@ function restartQuiz() {
     introPage.classList.add('active');
 }
 
-// La création des pages est maintenant dans sa propre fonction pour pouvoir être appelée au démarrage et au redémarrage
 function buildQuizPages() {
     questions.forEach((q, index) => {
         quizPageContainer.appendChild(createQuestionPage(q, index));
     });
 }
 
-// Initialisation du quiz
 function initQuiz() {
-    buildQuizPages(); // Crée les pages au chargement initial
+    buildQuizPages();
 
     startQuizButton.addEventListener('click', () => {
         introPage.classList.remove('active');
