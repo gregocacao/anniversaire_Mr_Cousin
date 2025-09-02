@@ -67,7 +67,7 @@ const introPage = document.getElementById('intro-page');
 const startQuizButton = document.getElementById('start-quiz-button');
 let currentQuestionIndex = 0;
 
-let totalErrors = 0; // Compteur global d'erreurs
+let totalErrors = 0;
 const errorMessages = [
     "Aïe ! Première erreur... La route est encore longue, ne lâche rien !",
     "Deuxième erreur. On dirait que le cadeau s'éloigne un peu...",
@@ -111,7 +111,7 @@ function createQuestionPage(questionData, index) {
     const nextButton = document.createElement('button');
     nextButton.classList.add('next-button');
     nextButton.textContent = "Question Suivante";
-    nextButton.style.display = 'none'; // Caché par défaut
+    nextButton.style.display = 'none';
     nextButton.onclick = goToNextQuestion;
     pageDiv.appendChild(nextButton);
 
@@ -141,11 +141,17 @@ function checkAnswer(selectedButton, selectedOption, correctAnswer, pageDiv) {
     } else {
         selectedButton.classList.add('wrong');
         
+        // --- MODIFICATION ICI ---
+        // Le bloc de code qui révélait la bonne réponse a été supprimé.
+        /*
+        // ANCIEN CODE SUPPRIMÉ :
         optionButtons.forEach(button => {
             if (button.textContent === correctAnswer) {
                 button.classList.add('correct');
             }
         });
+        */
+        // --- FIN DE LA MODIFICATION ---
 
         totalErrors++; 
 
@@ -190,19 +196,13 @@ function displayWinPage() {
     `;
 }
 
-// --- FONCTION CORRIGÉE ---
 function restartQuiz() {
-    // Réinitialiser la progression des questions, MAIS PAS LE COMPTEUR D'ERREURS
     currentQuestionIndex = 0;
-    // totalErrors = 0; // <-- C'EST CETTE LIGNE QUI POSAIT PROBLÈME, ON LA SUPPRIME !
 
-    // Vider les anciennes pages de questions
     quizPageContainer.innerHTML = '';
     
-    // Reconstruire les pages de questions
     buildQuizPages();
     
-    // Cacher la page de questions et afficher la page d'intro
     const firstQuestionPage = document.getElementById('question-page-0');
     if (firstQuestionPage) {
         firstQuestionPage.classList.remove('active');
