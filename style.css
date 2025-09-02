@@ -146,3 +146,19 @@ body {
     color: #e65c00; /* Orange plus foncé au survol */
     border-color: #e65c00; /* Souligne le texte au survol */
 }
+/* ... (tout le CSS existant) ... */
+
+.garmin-link:hover {
+    color: #e65c00; /* Orange plus foncé au survol */
+    border-color: #e65c00; /* Souligne le texte au survol */
+}
+
+/* NOUVEAU STYLE POUR LE BOUTON RECOMMENCER */
+.restart-button {
+    background-color: #6c757d; /* Une couleur grise/neutre */
+    margin-top: 10px; /* Un peu d'espace par rapport au message d'erreur */
+}
+
+.restart-button:hover {
+    background-color: #5a6268; /* Un gris plus foncé au survol */
+}
