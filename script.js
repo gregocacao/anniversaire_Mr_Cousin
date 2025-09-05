@@ -194,10 +194,6 @@ function displayWinPage() {
             <h2>Bravo Champion !</h2>
             <img src="./images/photo_11.jpg" alt="Photo de victoire" class="quiz-image">
             <p>Tu as prouvé tes connaissances et mérites amplement ton cadeau !</p>
-            <div class="garmin-link-container">
-                <p>Voici le lien vers ton cadeau :</p>
-                <a href="https://www.garmin.com/fr-FR/p/735563" target="_blank" class="garmin-link">Découvrir le cadeau !</a>
-            </div>
         </div>
     `;
 }
